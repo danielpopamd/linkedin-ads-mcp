@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Environment variables
+.env
+.env.local
+
+# Token storage (sensitive)
+tokens.json
+
+# Generated files (may contain sensitive account data)
+dashboard.html
+
+# Claude Code settings
+.claude/
+
+# IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Test coverage
+coverage/
+src/scripts/

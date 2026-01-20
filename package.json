@@ -1,0 +1,49 @@
+{
+  "name": "linkedin-ads-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for LinkedIn Ads - access and analyze advertising data across all linked ad accounts using Claude AI",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc && node dist/index.js",
+    "start": "node dist/index.js",
+    "auth": "node dist/auth-cli.js"
+  },
+  "keywords": [
+    "mcp",
+    "linkedin",
+    "ads",
+    "marketing",
+    "analytics",
+    "ai",
+    "claude",
+    "anthropic",
+    "performance-marketing",
+    "automation"
+  ],
+  "author": "Daniel Popa <hello@danielpopa.me> (https://danielpopa.me)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielpopamd/linkedin-ads-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/danielpopamd/linkedin-ads-mcp/issues"
+  },
+  "homepage": "https://github.com/danielpopamd/linkedin-ads-mcp#readme",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "dotenv": "^17.2.3",
+    "express": "^4.21.0",
+    "open": "^10.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
