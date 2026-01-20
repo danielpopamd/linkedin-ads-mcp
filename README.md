@@ -6,6 +6,158 @@
 
 An MCP (Model Context Protocol) server that enables **Claude AI** to access and analyze your LinkedIn Ads data. Built for marketers, founders, and growth teams who want to leverage AI for campaign optimization, performance reporting, and data-driven advertising decisions.
 
+---
+
+# Quick Install (No Coding Required!)
+
+**Don't want to deal with technical stuff?** Just copy one of the prompts below and paste it into Claude. The AI will do everything for you!
+
+---
+
+## Option 1: Install with Claude Code (Recommended)
+
+If you have [Claude Code](https://claude.ai/code) installed, just copy and paste this entire prompt:
+
+<details>
+<summary><strong>Click to expand the Claude Code installation prompt</strong></summary>
+
+```
+I want you to install the LinkedIn Ads MCP server so I can analyze my LinkedIn advertising data. Please do the following:
+
+1. FIRST, check if Node.js is installed by running `node --version`. If not installed, tell me to install it from https://nodejs.org first.
+
+2. Clone the repository to my home directory:
+   - cd ~
+   - git clone https://github.com/danielpopamd/linkedin-ads-mcp.git
+   - cd linkedin-ads-mcp
+
+3. Install dependencies and build:
+   - npm install
+   - npm run build
+
+4. Create the .env file with placeholder values:
+   - cp .env.example .env
+
+5. NOW IMPORTANT - Ask me for my LinkedIn API credentials:
+   - Ask: "Please provide your LinkedIn Client ID (from https://www.linkedin.com/developers/apps)"
+   - Ask: "Please provide your LinkedIn Client Secret"
+
+6. Update the .env file with the credentials I provide.
+
+7. Set up Claude Desktop configuration:
+   - Read the current Claude Desktop config file:
+     - macOS: ~/Library/Application Support/Claude/claude_desktop_config.json
+     - Windows: %APPDATA%/Claude/claude_desktop_config.json
+   - Add the linkedin-ads MCP server to mcpServers (merge with existing config if any):
+     {
+       "mcpServers": {
+         "linkedin-ads": {
+           "command": "node",
+           "args": ["<FULL_PATH_TO>/linkedin-ads-mcp/dist/index.js"],
+           "env": {
+             "LINKEDIN_CLIENT_ID": "<MY_CLIENT_ID>",
+             "LINKEDIN_CLIENT_SECRET": "<MY_CLIENT_SECRET>"
+           }
+         }
+       }
+     }
+   - Replace <FULL_PATH_TO> with the actual path (e.g., /Users/username)
+   - Replace the env values with my actual credentials
+
+8. Run the authentication flow:
+   - npm run auth
+   - This will open my browser - tell me to authorize the app with LinkedIn
+
+9. Tell me to restart Claude Desktop to activate the MCP server.
+
+10. After restart, confirm setup by telling me to ask Claude: "List my LinkedIn ad accounts"
+
+If you don't have my LinkedIn API credentials yet, first explain how to get them:
+- Go to https://www.linkedin.com/developers/apps
+- Create a new app (need a LinkedIn Company Page)
+- Go to Products tab and request "Advertising API" access
+- Go to Auth tab and add redirect URL: http://localhost:3000/callback
+- Copy the Client ID and Client Secret
+
+Start now!
+```
+
+</details>
+
+---
+
+## Option 2: Install with Claude Desktop (Chat-Based)
+
+If you're using Claude Desktop directly (without Claude Code), copy this prompt to start a guided setup:
+
+<details>
+<summary><strong>Click to expand the Claude Desktop guided setup prompt</strong></summary>
+
+```
+I want to install the LinkedIn Ads MCP server to analyze my LinkedIn advertising data with Claude. I'm not technical, so please guide me step by step with simple instructions.
+
+Please walk me through:
+
+1. **Check Prerequisites**
+   - Do I have Node.js installed? (Tell me how to check and where to download if needed)
+   - Do I have a LinkedIn Developer App? (If not, guide me through creating one at https://www.linkedin.com/developers/apps)
+
+2. **Get LinkedIn API Access**
+   Walk me through:
+   - Creating a LinkedIn Developer App
+   - Requesting Advertising API access (Products tab)
+   - Adding the redirect URL: http://localhost:3000/callback (Auth tab)
+   - Finding my Client ID and Client Secret
+
+3. **Download and Install**
+   Give me the exact commands to run in my terminal (one at a time):
+   - How to open Terminal (Mac) or Command Prompt (Windows)
+   - Clone the repository
+   - Install dependencies
+   - Build the project
+
+4. **Configure Claude Desktop**
+   - Tell me exactly where the config file is located
+   - Give me the exact JSON to add (with placeholders for my credentials)
+   - Show me how to edit the file
+
+5. **Authenticate with LinkedIn**
+   - What command to run
+   - What to do when the browser opens
+
+6. **Test the Setup**
+   - Tell me to restart Claude Desktop
+   - Give me a test question to ask
+
+Please start with step 1 and wait for my response before moving to the next step. Use simple language and assume I've never used a terminal before.
+```
+
+</details>
+
+---
+
+## What You'll Need Before Installing
+
+Before using either installation method, you'll need:
+
+1. **Node.js** (version 18 or higher) - [Download here](https://nodejs.org)
+2. **A LinkedIn Company Page** - Required to create a developer app
+3. **LinkedIn Developer App** with Advertising API access - [Create one here](https://www.linkedin.com/developers/apps)
+
+### Getting LinkedIn API Credentials (5-10 minutes)
+
+1. Go to [LinkedIn Developer Portal](https://www.linkedin.com/developers/apps)
+2. Click **"Create App"**
+3. Fill in:
+   - **App name**: "My LinkedIn Ads Analytics" (or anything you want)
+   - **LinkedIn Page**: Select your company page
+   - **App logo**: Upload any square image
+4. After creating, go to **"Products"** tab → Request **"Advertising API"** (approval takes 1-5 days)
+5. Go to **"Auth"** tab → Add redirect URL: `http://localhost:3000/callback`
+6. Copy your **Client ID** and **Client Secret** - you'll need these!
+
+---
+
 ## Created By
 
 **[Daniel Popa](https://danielpopa.me)** - Performance Marketing Consultant & AI Automation Specialist
@@ -16,6 +168,12 @@ This tool was built to bridge the gap between LinkedIn's advertising data and AI
 
 - Website: [danielpopa.me](https://danielpopa.me)
 - Focus: Performance Marketing, AI Automation, Growth Strategy
+
+---
+
+# Manual Installation (For Developers)
+
+If you prefer to install manually or want more control, follow the instructions below.
 
 ---
 
