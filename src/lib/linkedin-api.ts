@@ -472,19 +472,24 @@ export class LinkedInApiClient {
     headline: string;
     primaryText: string;
     landingPageUrl: string;
+    contentType: string;
   }> {
     const result = {
       imageUrl: '',
       headline: creative.name || '',
       primaryText: '',
       landingPageUrl: '',
+      contentType: 'OTHER' as string,
     };
 
     const reference = creative?.content?.reference;
     if (!reference) return result;
 
-    // Skip non-post references (InMail, etc.)
+    // Handle non-post references (InMail, etc.)
     if (!reference.includes('share') && !reference.includes('ugcPost')) {
+      if (reference.includes('adInMailContent')) {
+        result.contentType = 'INMAIL';
+      }
       return result;
     }
 
@@ -557,6 +562,19 @@ export class LinkedInApiClient {
       // Use contentLandingPage if available
       if (post.contentLandingPage && !result.landingPageUrl) {
         result.landingPageUrl = post.contentLandingPage;
+      }
+
+      // Determine content type from actual post structure
+      if (content.multiImage?.images?.length > 1) {
+        result.contentType = 'CAROUSEL';
+      } else if (content.media?.id?.includes('video')) {
+        result.contentType = 'VIDEO';
+      } else if (content.media?.id?.includes('image') || result.imageUrl) {
+        result.contentType = 'IMAGE';
+      } else if (content.article) {
+        result.contentType = 'ARTICLE';
+      } else if (commentary && !content.media && !content.multiImage && !content.article) {
+        result.contentType = 'TEXT';
       }
 
     } catch (error) {

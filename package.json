@@ -8,7 +8,8 @@
     "build": "tsc",
     "dev": "tsc && node dist/index.js",
     "start": "node dist/index.js",
-    "auth": "node dist/auth-cli.js"
+    "auth": "node dist/auth-cli.js",
+    "dashboard": "tsc && node dist/scripts/generate-dashboard.js && open dashboard.html"
   },
   "keywords": [
     "mcp",

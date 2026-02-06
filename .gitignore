@@ -31,4 +31,3 @@ npm-debug.log*
 
 # Test coverage
 coverage/
-src/scripts/
