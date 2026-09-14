@@ -14,8 +14,8 @@ export interface AdAccount {
   id: string;
   name: string;
   currency: string;
-  type: 'BUSINESS' | 'ENTERPRISE';
-  status: 'ACTIVE' | 'DRAFT' | 'CANCELED' | 'PENDING_DELETION' | 'REMOVED';
+  type: "BUSINESS" | "ENTERPRISE";
+  status: "ACTIVE" | "DRAFT" | "CANCELED" | "PENDING_DELETION" | "REMOVED";
   servingStatuses: string[];
   reference: string;
   notifiedOnCampaignOptimization: boolean;
@@ -32,7 +32,7 @@ export interface CampaignGroup {
   id: string;
   account: string;
   name: string;
-  status: 'ACTIVE' | 'PAUSED' | 'ARCHIVED' | 'DRAFT' | 'CANCELED';
+  status: "ACTIVE" | "PAUSED" | "ARCHIVED" | "DRAFT" | "CANCELED";
   runSchedule?: {
     start: number;
     end?: number;
@@ -48,7 +48,7 @@ export interface Campaign {
   account: string;
   campaignGroup: string;
   name: string;
-  status: 'ACTIVE' | 'PAUSED' | 'ARCHIVED' | 'DRAFT' | 'CANCELED';
+  status: "ACTIVE" | "PAUSED" | "ARCHIVED" | "DRAFT" | "CANCELED";
   type: string;
   objectiveType: string;
   costType: string;
@@ -69,7 +69,7 @@ export interface Campaign {
 export interface Creative {
   id: string;
   campaign: string;
-  status: 'ACTIVE' | 'PAUSED' | 'DRAFT' | 'ARCHIVED' | 'CANCELED';
+  status: "ACTIVE" | "PAUSED" | "DRAFT" | "ARCHIVED" | "CANCELED";
   type: string;
   review?: {
     status: string;
@@ -130,25 +130,25 @@ export interface AnalyticsRecord {
 }
 
 export type DemographicPivot =
-  | 'MEMBER_JOB_FUNCTION'
-  | 'MEMBER_SENIORITY'
-  | 'MEMBER_INDUSTRY'
-  | 'MEMBER_COMPANY_SIZE'
-  | 'MEMBER_JOB_TITLE'
-  | 'MEMBER_COMPANY'
-  | 'MEMBER_COUNTRY'
-  | 'MEMBER_COUNTRY_V2'
-  | 'MEMBER_REGION'
-  | 'MEMBER_REGION_V2';
+  | "MEMBER_JOB_FUNCTION"
+  | "MEMBER_SENIORITY"
+  | "MEMBER_INDUSTRY"
+  | "MEMBER_COMPANY_SIZE"
+  | "MEMBER_JOB_TITLE"
+  | "MEMBER_COMPANY"
+  | "MEMBER_COUNTRY"
+  | "MEMBER_COUNTRY_V2"
+  | "MEMBER_REGION"
+  | "MEMBER_REGION_V2";
 
 export type EntityPivot =
-  | 'ACCOUNT'
-  | 'CAMPAIGN_GROUP'
-  | 'CAMPAIGN'
-  | 'CREATIVE'
-  | 'CONVERSION';
+  | "ACCOUNT"
+  | "CAMPAIGN_GROUP"
+  | "CAMPAIGN"
+  | "CREATIVE"
+  | "CONVERSION";
 
-export type TimeGranularity = 'ALL' | 'DAILY' | 'MONTHLY' | 'YEARLY';
+export type TimeGranularity = "ALL" | "DAILY" | "MONTHLY" | "YEARLY";
 
 // Conversion Types
 export interface Conversion {
@@ -168,7 +168,7 @@ export interface LeadGenForm {
   id: string;
   name: string;
   account: string;
-  status: 'DRAFT' | 'SUBMITTED' | 'PUBLISHED' | 'ARCHIVED';
+  status: "DRAFT" | "SUBMITTED" | "PUBLISHED" | "ARCHIVED";
   headline: string;
   description?: string;
   thankYouMessage: string;
@@ -189,8 +189,8 @@ export interface SavedAudience {
   id: string;
   name: string;
   account: string;
-  type: 'MATCHED' | 'LOOKALIKE' | 'PREDICTIVE';
-  status: 'ACTIVE' | 'EXPIRED' | 'PROCESSING' | 'FAILED';
+  type: "MATCHED" | "LOOKALIKE" | "PREDICTIVE";
+  status: "ACTIVE" | "EXPIRED" | "PROCESSING" | "FAILED";
   memberCount?: number;
   matchRate?: number;
   createdAt: number;
@@ -220,8 +220,8 @@ export interface LinkedInApiError {
 
 // Tool Input Types
 export interface ListAdAccountsInput {
-  status?: Array<'ACTIVE' | 'DRAFT' | 'CANCELED' | 'PENDING_DELETION'>;
-  type?: 'BUSINESS' | 'ENTERPRISE';
+  status?: Array<"ACTIVE" | "DRAFT" | "CANCELED" | "PENDING_DELETION">;
+  type?: "BUSINESS" | "ENTERPRISE";
   includeTest?: boolean;
 }
 
@@ -251,7 +251,7 @@ export interface GetCreativePerformanceInput {
 
 export interface GetCampaignGroupsInput {
   accountId: string;
-  status?: Array<'ACTIVE' | 'PAUSED' | 'ARCHIVED' | 'DRAFT'>;
+  status?: Array<"ACTIVE" | "PAUSED" | "ARCHIVED" | "DRAFT">;
   includePerformance?: boolean;
   startDate?: string;
   endDate?: string;
@@ -263,7 +263,7 @@ export interface GetAudienceDemographicsInput {
   demographicType: DemographicPivot;
   startDate: string;
   endDate?: string;
-  metric?: 'impressions' | 'clicks' | 'costInUsd';
+  metric?: "impressions" | "clicks" | "costInUsd";
   limit?: number;
 }
 
@@ -277,8 +277,8 @@ export interface GetAudienceReachInput {
 
 export interface ListSavedAudiencesInput {
   accountId: string;
-  status?: Array<'ACTIVE' | 'EXPIRED' | 'PROCESSING'>;
-  audienceType?: 'MATCHED' | 'LOOKALIKE' | 'PREDICTIVE';
+  status?: Array<"ACTIVE" | "EXPIRED" | "PROCESSING">;
+  audienceType?: "MATCHED" | "LOOKALIKE" | "PREDICTIVE";
 }
 
 export interface GetConversionPerformanceInput {
@@ -305,13 +305,13 @@ export interface GetLeadGenPerformanceInput {
 
 export interface ListLeadFormsInput {
   accountId: string;
-  status?: Array<'DRAFT' | 'PUBLISHED' | 'ARCHIVED'>;
+  status?: Array<"DRAFT" | "PUBLISHED" | "ARCHIVED">;
   includeQuestions?: boolean;
 }
 
 export interface ComparePerformanceInput {
   accountId: string;
-  comparisonType: 'TIME_PERIOD' | 'CAMPAIGNS' | 'CAMPAIGN_GROUPS';
+  comparisonType: "TIME_PERIOD" | "CAMPAIGNS" | "CAMPAIGN_GROUPS";
   periodA: {
     startDate?: string;
     endDate?: string;
@@ -331,7 +331,7 @@ export interface GetDailyTrendsInput {
   startDate: string;
   endDate?: string;
   metrics?: string[];
-  entityLevel?: 'ACCOUNT' | 'CAMPAIGN_GROUP' | 'CAMPAIGN';
+  entityLevel?: "ACCOUNT" | "CAMPAIGN_GROUP" | "CAMPAIGN";
 }
 
 // Write Tool Input Types
@@ -339,7 +339,7 @@ export interface GetDailyTrendsInput {
 export interface CreateCampaignGroupInput {
   accountId: string;
   name: string;
-  status?: 'ACTIVE' | 'DRAFT';
+  status?: "ACTIVE" | "DRAFT";
   startDate: string;
   endDate?: string;
   totalBudgetAmount?: string;
@@ -353,7 +353,7 @@ export interface UpdateCampaignGroupInput {
   accountId: string;
   campaignGroupId: string;
   name?: string;
-  status?: 'ACTIVE' | 'PAUSED' | 'ARCHIVED' | 'DRAFT';
+  status?: "ACTIVE" | "PAUSED" | "ARCHIVED" | "DRAFT";
   totalBudgetAmount?: string;
   totalBudgetCurrency?: string;
   endDate?: number;
@@ -366,7 +366,7 @@ export interface CreateCampaignInput {
   objectiveType: string;
   type?: string;
   costType?: string;
-  status?: 'ACTIVE' | 'DRAFT';
+  status?: "ACTIVE" | "DRAFT";
   dailyBudgetAmount: string;
   dailyBudgetCurrency?: string;
   totalBudgetAmount?: string;
@@ -388,7 +388,7 @@ export interface UpdateCampaignInput {
   accountId: string;
   campaignId: string;
   name?: string;
-  status?: 'ACTIVE' | 'PAUSED' | 'ARCHIVED' | 'DRAFT';
+  status?: "ACTIVE" | "PAUSED" | "ARCHIVED" | "DRAFT";
   dailyBudgetAmount?: string;
   dailyBudgetCurrency?: string;
   totalBudgetAmount?: string;
@@ -405,14 +405,14 @@ export interface UpdateCampaignInput {
 export interface UpdateCreativeStatusInput {
   accountId: string;
   creativeId: string;
-  intendedStatus: 'ACTIVE' | 'PAUSED' | 'ARCHIVED';
+  intendedStatus: "ACTIVE" | "PAUSED" | "ARCHIVED";
 }
 
 export interface CreateCreativeInput {
   accountId: string;
   campaignId: string;
   contentReference?: string;
-  intendedStatus?: 'ACTIVE' | 'DRAFT';
+  intendedStatus?: "ACTIVE" | "DRAFT";
   name?: string;
   leadgenFormId?: string;
   leadgenCallToActionLabel?: string;
@@ -427,7 +427,7 @@ export interface CreateInlineAdInput {
   mediaTitle?: string;
   landingPageUrl?: string;
   callToActionLabel?: string;
-  intendedStatus?: 'ACTIVE' | 'DRAFT';
+  intendedStatus?: "ACTIVE" | "DRAFT";
   name?: string;
   leadgenFormId?: string;
   leadgenCallToActionLabel?: string;
@@ -446,7 +446,7 @@ export interface DeleteCampaignGroupInput {
 export interface ListCampaignsInput {
   accountId: string;
   campaignGroupIds?: string[];
-  status?: Array<'ACTIVE' | 'PAUSED' | 'ARCHIVED' | 'DRAFT' | 'CANCELED'>;
+  status?: Array<"ACTIVE" | "PAUSED" | "ARCHIVED" | "DRAFT" | "CANCELED">;
 }
 
 export interface UploadImageInput {
@@ -454,4 +454,78 @@ export interface UploadImageInput {
   filePath: string;
   accountId?: string;
   assetName?: string;
+}
+
+// ==================== Ad Library Types ====================
+
+export interface SearchAdLibraryInput {
+  keyword?: string;
+  countries?: string[]; // 2-letter country codes (e.g., "us", "gb")
+  advertiser?: string;
+  startDate?: string; // YYYY-MM-DD format
+  endDate?: string; // YYYY-MM-DD format
+  start?: number; // Pagination offset (default: 0)
+  count?: number; // Results per page (max 25)
+  payerName?: string;
+  includedTargetingFacetCategories?: TargetingFacetCategory[];
+  excludedTargetingFacetCategories?: TargetingFacetCategory[];
+  totalImpressionsRange?: {
+    from: number;
+    to: number;
+  };
+  sortBy?: {
+    field: "CREATED_TIME";
+    order: "ASCENDING" | "DESCENDING";
+  };
+}
+
+export type TargetingFacetCategory =
+  | "LANGUAGE"
+  | "LOCATION"
+  | "AUDIENCE"
+  | "AGE"
+  | "GENDER"
+  | "COMPANY"
+  | "EDUCATION"
+  | "JOB"
+  | "INTERESTS"
+  | "TRAITS";
+
+export interface AdLibraryAd {
+  adUrl: string;
+  isRestricted: boolean;
+  restrictionDetails?: string;
+  details: {
+    advertiser: {
+      advertiserName: string;
+      advertiserUrl: string;
+      adPayer?: string;
+    };
+    type: string;
+    adTargeting: AdLibraryTargeting[];
+    adStatistics: AdLibraryStatistics;
+  };
+}
+
+export interface AdLibraryTargeting {
+  facetName: string;
+  isIncluded: boolean;
+  includedSegments: string[];
+  isExcluded: boolean;
+  excludedSegments: string[];
+}
+
+export interface AdLibraryStatistics {
+  firstImpressionAt: number;
+  latestImpressionAt: number;
+  totalImpressions: {
+    from: number;
+    to: number;
+  };
+  impressionsDistributionByCountry: AdLibraryImpressionsPerCountry[];
+}
+
+export interface AdLibraryImpressionsPerCountry {
+  country: string; // e.g., "urn:li:country:US"
+  impressionPercentage: number;
 }

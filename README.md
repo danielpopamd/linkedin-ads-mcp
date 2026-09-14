@@ -199,13 +199,14 @@ This MCP server connects Claude Desktop (or any MCP-compatible client) to the Li
 "What's my cost per lead for the lead gen campaigns?"
 "Which creatives have the best CTR?"
 "Show me the daily trend for conversions"
+"Search the ad library for competitor ads targeting technology job functions"
 ```
 
 ---
 
 ## Features
 
-- **25 Specialized Tools** - Covering accounts, campaigns, creatives, audiences, conversions, analytics, and full campaign management (create, update, delete)
+- **26 Specialized Tools** - Covering accounts, campaigns, creatives, audiences, conversions, analytics, ad library search, and full campaign management (create, update, delete)
 - **Comprehensive Metrics** - Every report includes: Spend, Impressions, Clicks, CTR, Reach, Frequency, Engagements, Engagement Rate, CPM, CPC, Conversions, Conversion Rate, Cost per Conversion, Audience Penetration, and Average Dwell Time
 - **Single OAuth Authentication** - Authenticate once and access all your LinkedIn ad accounts
 - **Automatic Token Refresh** - Tokens refresh automatically before expiration
@@ -359,6 +360,12 @@ After updating the config, restart Claude Desktop for the changes to take effect
 | `compare_performance` | Compare metrics between time periods or entities |
 | `get_daily_trends` | Daily time-series data for trend analysis |
 
+### Ad Library
+
+| Tool | Description |
+|------|-------------|
+| `search_ad_library` | Search LinkedIn's public Ad Library for ads by keyword, advertiser, country, date range, targeting facets, and impression range. Returns ad previews, advertiser details, targeting info, and impression statistics. Max 25 results per request with pagination support. |
+
 ### Campaign Management (Write Operations)
 
 | Tool | Description |
@@ -438,6 +445,7 @@ linkedin-ads-mcp/
 │       ├── demographics.ts   # Audience demographics tools
 │       ├── conversions.ts    # Conversion & lead gen tools
 │       ├── analytics.ts      # Advanced analytics tools
+│       ├── ad-library.ts     # Ad Library search tools
 │       └── campaign-management.ts  # Campaign CRUD & image upload tools
 ├── dist/                     # Compiled JavaScript output
 ├── package.json

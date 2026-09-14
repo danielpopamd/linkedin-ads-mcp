@@ -34,10 +34,11 @@
   },
   "homepage": "https://github.com/danielpopamd/linkedin-ads-mcp#readme",
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.0.0",
+    "@modelcontextprotocol/sdk": "^1.29.0",
     "dotenv": "^17.2.3",
-    "express": "^4.21.0",
-    "open": "^10.1.0"
+    "express": "^5.2.1",
+    "open": "^10.1.0",
+    "mime-types": "^3.0.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
