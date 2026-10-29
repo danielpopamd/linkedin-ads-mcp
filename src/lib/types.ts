@@ -446,7 +446,8 @@ export interface DeleteCampaignGroupInput {
 export interface ListCampaignsInput {
   accountId: string;
   campaignGroupIds?: string[];
-  status?: Array<'ACTIVE' | 'PAUSED' | 'ARCHIVED' | 'DRAFT' | 'CANCELED'>;
+  status?: Array<'ACTIVE' | 'PAUSED' | 'ARCHIVED' | 'COMPLETED' | 'DRAFT' | 'CANCELED' | 'REMOVED'>;
+  maxResults?: number;
 }
 
 export interface UploadImageInput {

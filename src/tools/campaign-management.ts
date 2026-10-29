@@ -633,9 +633,13 @@ export const listCampaignsTool: Tool = {
         type: 'array',
         items: {
           type: 'string',
-          enum: ['ACTIVE', 'PAUSED', 'ARCHIVED', 'DRAFT', 'CANCELED'],
+          enum: ['ACTIVE', 'PAUSED', 'ARCHIVED', 'COMPLETED', 'DRAFT', 'CANCELED', 'REMOVED'],
         },
         description: 'Filter by campaign status. If omitted, returns all statuses.',
+      },
+      maxResults: {
+        type: 'number',
+        description: 'Maximum campaigns to return (default 1000). Large accounts hold thousands; the response sets truncated=true when the cap is hit.',
       },
     },
     required: ['accountId'],
@@ -647,9 +651,11 @@ export async function handleListCampaigns(client: LinkedInApiClient, args: unkno
 
   if (!input.accountId) throw new Error('accountId is required');
 
+  const maxResults = input.maxResults ?? 1000;
   const campaigns = await client.listCampaigns(input.accountId, {
     campaignGroupIds: input.campaignGroupIds,
     status: input.status,
+    maxResults,
   });
 
   return {
@@ -666,6 +672,7 @@ export async function handleListCampaigns(client: LinkedInApiClient, args: unkno
       runSchedule: c.runSchedule,
     })),
     totalCount: campaigns.length,
+    truncated: campaigns.length >= maxResults,
   };
 }
 

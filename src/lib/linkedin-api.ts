@@ -100,8 +100,8 @@ export class LinkedInApiClient {
           if (Array.isArray(value)) {
             // Arrays need List() wrapper
             queryParts.push(`${key}=List(${value.map(v => encodeURIComponent(v)).join(',')})`);
-          } else if (key === 'fields' || key === 'dateRange') {
-            // Fields and dateRange should not have their internal commas/colons encoded
+          } else if (key === 'fields' || key === 'dateRange' || key === 'search') {
+            // These carry Rest.li expressions; their commas/colons/parens must survive verbatim
             queryParts.push(`${key}=${value}`);
           } else {
             queryParts.push(`${key}=${encodeURIComponent(String(value))}`);
@@ -264,25 +264,45 @@ export class LinkedInApiClient {
   async listCampaigns(accountId: string, options: {
     campaignGroupIds?: string[];
     status?: string[];
+    maxResults?: number;
   } = {}): Promise<Campaign[]> {
-    const params: Record<string, string | string[]> = {
-      q: 'search',
-    };
-
+    // Rest.li 2.0 nests the facets under a single `search` expression. The dotted
+    // form (search.status.values) is rejected with a 400.
+    const facets: string[] = [];
     if (options.campaignGroupIds?.length) {
-      params['search.campaignGroup.values'] = options.campaignGroupIds.map(id => `urn:li:sponsoredCampaignGroup:${id}`);
+      const urns = options.campaignGroupIds.map(id => `urn:li:sponsoredCampaignGroup:${id}`);
+      facets.push(`campaignGroup:(values:List(${urns.join(',')}))`);
     }
     if (options.status?.length) {
-      params['search.status.values'] = options.status;
+      facets.push(`status:(values:List(${options.status.join(',')}))`);
     }
 
-    try {
+    // Accounts can hold thousands of campaigns, so cap the sweep rather than
+    // firing one request per 100 indefinitely. Callers raise it when they need more.
+    const maxResults = options.maxResults ?? 1000;
+    const campaigns: Campaign[] = [];
+    const pageSize = 100;
+
+    for (let start = 0; start < maxResults; start += pageSize) {
+      const params: Record<string, string | string[]> = {
+        q: 'search',
+        start: String(start),
+        count: String(pageSize),
+      };
+      if (facets.length) {
+        params['search'] = `(${facets.join(',')})`;
+      }
+
       const response = await this.request<LinkedInApiResponse<Campaign>>(`/rest/adAccounts/${accountId}/adCampaigns`, { params });
-      return response.elements || [];
-    } catch (error) {
-      console.error('Failed to fetch campaigns:', error);
-      return [];
+      const page = response.elements || [];
+      campaigns.push(...page);
+
+      if (page.length < pageSize) {
+        break;
+      }
     }
+
+    return campaigns.slice(0, maxResults);
   }
 
   /**
